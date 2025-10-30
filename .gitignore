@@ -20,3 +20,6 @@ env/
 *.orig
 *.rej
 *.patch
+
+# Hisham files
+*.hm
