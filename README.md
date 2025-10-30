@@ -69,3 +69,33 @@ To run this project locally, follow these steps:
 ## 🗂️ Project Structure
 
 Here is a basic structure for the project:
+. ├── .gitignore ├── README.md ├── main.py # Main FastAPI application ├── requirements.txt # Project dependencies ├── script.py # Script to load data into MongoDB ├── courses.json # Course data (from the tutorial) └── tests/ └── test_main.py # PyTest tests for the API
+
+## Endpoints
+
+The following API endpoints are implemented:
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/courses` | Get a list of all courses. Supports sorting and filtering. |
+| `GET` | `/courses/{course_id}` | Get the overview of a specific course. |
+| `GET` | `/courses/{course_id}/{chapter_id}` | Get information about a specific chapter. |
+| `POST`| `/courses/{course_id}/{chapter_id}` | Rate a specific chapter. |
+
+## 🎓 Learning Progress
+
+I am using this project to track my progress through the tutorial sections.
+
+- [ ] **Setup**: Set up the MongoDB database.
+- [ ] **Data**: Parse `courses.json` and insert data into MongoDB.
+- [ ] **Endpoints**: Design and implement the FastAPI endpoints.
+  - [ ] `GET /courses`
+  - [ ] `GET /courses/{course_id}`
+  - [ ] `GET /courses/{course_id}/{chapter_id}`
+  - [ ] `POST /courses/{course_id}/{chapter_id}`
+- [ ] **Testing**: Write automated API tests with PyTest.
+- [ ] **Containerization**: Containerize the application with Docker.
+
+## 📄 License
+
+This project is open-source and available under the [MIT License](LICENSE).
