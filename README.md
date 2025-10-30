@@ -69,6 +69,7 @@ To run this project locally, follow these steps:
 ## 🗂️ Project Structure
 
 Here is a basic structure for the project:
+```sh
 ├── .gitignore 
 ├── README.md 
 ├── main.py # Main FastAPI application 
@@ -77,6 +78,7 @@ Here is a basic structure for the project:
 ├── courses.json # Course data (from the tutorial) 
     └── tests/ 
     └── test_main.py # PyTest tests for the API
+```
 
 ## Endpoints
 
