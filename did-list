@@ -1,0 +1,9 @@
+setup git and github 
+setup ssh to github
+setup monogodb using brew brew install --cask gcollazo-mongodb
+removed monogodb from gcollazo-mongodb
+
+brew tap mongodb/brew
+brew install mongodb-community
+brew services start mongodb-community
+mongosh
