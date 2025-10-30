@@ -5,7 +5,7 @@ Learn FastAPI and MongoDB from [course page](https://www.freecodecamp.org/news/f
 
 This repository tracks my progress in learning FastAPI by building a Course Administration API, following the [FastAPI Quickstart guide from freeCodeCamp](https://www.freecodecamp.org/news/fastapi-quickstart/).
 
-## 📖 Project Description
+## Project Description 📖
 
 This project is a hands-on exercise to understand the fundamentals of building a high-performance API using FastAPI and MongoDB. The API allows users to manage and retrieve information about courses, view chapter details, and submit ratings for chapters.
 
@@ -15,7 +15,7 @@ This project is a hands-on exercise to understand the fundamentals of building a
 * Get details for a specific chapter within a course.
 * Submit a rating for a chapter, which then aggregates to a total course rating.
 
-## 💻 Tech Stack
+## Tech Stack 💻
 
 * **Framework**: [FastAPI](https://fastapi.tiangolo.com/)
 * **Database**: [MongoDB](https://www.mongodb.com/)
@@ -25,7 +25,7 @@ This project is a hands-on exercise to understand the fundamentals of building a
 * **Testing**: [PyTest](https://docs.pytest.org/en/7.4.x/)
 * **Containerization**: [Docker](https://www.docker.com/)
 
-## 🚀 Setup and Installation
+## Setup and Installation 🧞‍♂️
 
 To run this project locally, follow these steps:
 
@@ -66,7 +66,7 @@ To run this project locally, follow these steps:
     * **Swagger UI**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
     * **ReDoc**: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
 
-## 🗂️ Project Structure
+## Project Structure 🗂️
 
 Here is a basic structure for the project:
 ```sh
@@ -80,7 +80,7 @@ Here is a basic structure for the project:
     └── test_main.py # PyTest tests for the API
 ```
 
-## Endpoints
+## Endpoints 🙋🏽‍♀️
 
 The following API endpoints are implemented:
 
@@ -91,7 +91,7 @@ The following API endpoints are implemented:
 | `GET` | `/courses/{course_id}/{chapter_id}` | Get information about a specific chapter. |
 | `POST`| `/courses/{course_id}/{chapter_id}` | Rate a specific chapter. |
 
-## 🎓 Learning Progress
+## Learning Progress 🎓 
 
 I am using this project to track my progress through the tutorial sections.
 
@@ -105,6 +105,6 @@ I am using this project to track my progress through the tutorial sections.
 - [ ] **Testing**: Write automated API tests with PyTest.
 - [ ] **Containerization**: Containerize the application with Docker.
 
-## 📄 License
+## License 📄
 
 This project is open-source and available under the [MIT License](LICENSE).
