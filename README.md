@@ -69,7 +69,14 @@ To run this project locally, follow these steps:
 ## 🗂️ Project Structure
 
 Here is a basic structure for the project:
-. ├── .gitignore ├── README.md ├── main.py # Main FastAPI application ├── requirements.txt # Project dependencies ├── script.py # Script to load data into MongoDB ├── courses.json # Course data (from the tutorial) └── tests/ └── test_main.py # PyTest tests for the API
+├── .gitignore 
+├── README.md 
+├── main.py # Main FastAPI application 
+├── requirements.txt # Project dependencies 
+├── script.py # Script to load data into MongoDB 
+├── courses.json # Course data (from the tutorial) 
+    └── tests/ 
+    └── test_main.py # PyTest tests for the API
 
 ## Endpoints
 
