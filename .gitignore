@@ -23,3 +23,6 @@ env/
 
 # Hisham files
 *.hm
+
+# Mac Specific
+Icon
