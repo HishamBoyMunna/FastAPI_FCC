@@ -9,3 +9,70 @@ from fastapi.encoders import jsonable_encoder
 app = FastAPI()
 client = MongoClient("mongodb://localhost:27017/")
 db = client["courses"]
+
+
+@app.get("/courses")
+def get_courses(sort_by: str = "date", domain: str = ""):
+    for course in db.courses.find():
+        total = 0
+        count = 0
+        for chapter in course["chapters"]:
+            with contextlib.suppress(KeyError):
+                total += chapter["rating"]["total"]
+                count += chapter["rating"]["count"]
+        db.courses.update_one(
+            {"_id": course["_id"]},
+            {"$set": {"rating": {"total": total, "count": count}}},
+        )
+
+    if sort_by == "date":
+        sort_field = "date"
+        sort_order = -1
+
+    elif sort_by == "rating":
+        sort_field = "rating"
+        sort_order = -1
+    else:
+        sort_field = "name"
+        sort_order = -1
+
+    query = {}
+    if domain:
+        query["domain"] = domain
+
+    courses = db.courses.find(
+        query,
+        {"name": 1, "date": 1, "description": 1, "domain": 1, "rating": 1, "_id": 0},
+    ).sort(sort_field, sort_order)
+    return list(courses)
+
+
+@app.get("/courses/{course_id}")
+def get_course(course_id: str):
+    course = db.courses.find_one({"_id": ObjectId(course_id)}, {"_id": 0, "chapter": 0})
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found! :(")
+    try:
+        course["rating"] = course["rating"]["total"]
+    except KeyError:
+        course["rating"] = "Not rated yet"
+
+    return course
+
+
+@app.get("/courses/{course_id}/{chapter_id}")
+def get_chapter(course_id: str, chapter_id: str):
+    course = db.courses.find_one(
+        {"_id": ObjectId(course_id)},
+        {
+            "_id": 0,
+        },
+    )
+    if not course:
+        raise HTTPException(status_code=404, detail="Chapter not found !:(")
+    chapters = course.get("chapters", [])
+    try:
+        chapter = chapters[int(chapter_id)]
+    except (ValueError, IndexError) as e:
+        raise HTTPException(status_code=404, detail="Chapter not found !:(") from e
+    return chapter
