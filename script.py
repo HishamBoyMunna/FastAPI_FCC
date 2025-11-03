@@ -11,8 +11,8 @@ import json
 from pymongo.synchronous import collection
 
 client = pymongo.MongoClient("mongodb://localhost:27017/")
-db = client["courses_test"]
-collection = db["courses_test2"]
+db = client["courses"]
+collection = db["courses"]
 
 with open("courses.json", "r") as f:
     courses = json.load(f)
