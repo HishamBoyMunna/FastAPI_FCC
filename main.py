@@ -1,5 +1,3 @@
-#!/bin/env python3.13
-
 import contextlib
 from fastapi import FastAPI, HTTPException, Query
 from pymongo import MongoClient
@@ -12,7 +10,8 @@ db = client["courses"]
 
 
 @app.get("/courses")
-def get_courses(sort_by: str = "date", domain: str = ""):
+def get_courses(sort_by: str = "date", domain: str = None):
+    # set the rating.total and rating.count to all the courses based on the sum of the chapters rating
     for course in db.courses.find():
         total = 0
         count = 0
@@ -25,16 +24,20 @@ def get_courses(sort_by: str = "date", domain: str = ""):
             {"$set": {"rating": {"total": total, "count": count}}},
         )
 
+    # sort_by == 'date' [DESCENDING]
     if sort_by == "date":
         sort_field = "date"
         sort_order = -1
 
+    # sort_by == 'rating' [DESCENDING]
     elif sort_by == "rating":
-        sort_field = "rating"
+        sort_field = "rating.total"
         sort_order = -1
+
+    # sort_by == 'alphabetical' [ASCENDING]
     else:
         sort_field = "name"
-        sort_order = -1
+        sort_order = 1
 
     query = {}
     if domain:
@@ -49,9 +52,11 @@ def get_courses(sort_by: str = "date", domain: str = ""):
 
 @app.get("/courses/{course_id}")
 def get_course(course_id: str):
-    course = db.courses.find_one({"_id": ObjectId(course_id)}, {"_id": 0, "chapter": 0})
+    course = db.courses.find_one(
+        {"_id": ObjectId(course_id)}, {"_id": 0, "chapters": 0}
+    )
     if not course:
-        raise HTTPException(status_code=404, detail="Course not found! :(")
+        raise HTTPException(status_code=404, detail="Course not found")
     try:
         course["rating"] = course["rating"]["total"]
     except KeyError:
@@ -69,12 +74,12 @@ def get_chapter(course_id: str, chapter_id: str):
         },
     )
     if not course:
-        raise HTTPException(status_code=404, detail="Chapter not found !:(")
+        raise HTTPException(status_code=404, detail="Course not found")
     chapters = course.get("chapters", [])
     try:
         chapter = chapters[int(chapter_id)]
     except (ValueError, IndexError) as e:
-        raise HTTPException(status_code=404, detail="Chapter not found !:(") from e
+        raise HTTPException(status_code=404, detail="Chapter not found") from e
     return chapter
 
 
